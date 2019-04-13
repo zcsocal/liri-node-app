@@ -9,7 +9,7 @@ var action = process.argv[2];
 var parameter = process.argv.slice(3).join(" ");
 
 
-var getArtistName = function(artist){
+var getArtist = function(artist){
     return artist.name;
 }
 
@@ -26,7 +26,7 @@ var spotifySong = function(songName) {
         var songs = data.tracks.items;
         for (var i=0; i < songs.length; i++){
             console.log[i];
-            console.log("Artist: " + songs[i].artists.map(getArtistName));
+            console.log("Artist: " + songs[i].artists.map(getArtist));
             console.log("Song Name: " + songs[i].name);
             console.log("Preview: " + songs[i].preview_url);
             console.log("Album: " + songs[i].album.name);
@@ -57,7 +57,7 @@ var getMovie = function(movieName){
 
 }
 
-
+//Random function
 var doRandom = function() {
     fs.readFile('random.txt', 'utf8', function (err, data) {
         if (err) throw err;
@@ -74,6 +74,7 @@ var doRandom = function() {
 
 }
 
+//Commands are created using this switch statement
 var command = function(caseData, functionData){
 
     switch(caseData){
