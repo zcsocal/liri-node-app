@@ -43,12 +43,38 @@ var getMovie = function(movieName){
     console.log('error:', error); // Print the error if one occurred
     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
     // console.log('body:', body); // 
+    var jsonData = JSON.parse(body);
+    console.log('***********************');
+    console.log('Title: ' + jsonData.Title);
+    console.log('Year: ' + jsonData.Year);
+    console.log('Rating: ' + jsonData.Rated);
+    console.log('IMDB: ' + jsonData.imdbRating);
+    console.log('Actors: ' + jsonData.Actors);
+    console.log('Plot: ' + jsonData.Plot);
+    console.log('***********************');
 
-        
     });
 
 }
-var pick = function(caseData, functionData){
+
+
+var doRandom = function() {
+    fs.readFile('random.txt', 'utf8', function (err, data) {
+        if (err) throw err;
+        // console.log(data);
+        var dataArr = data.split(",");
+
+        if (dataArr.length == 2) {
+            command(dataArr[0], dataArr[1]);
+        } else if (dataArr.length == 1) {
+            command(dataArr[0]);
+        }
+
+  });
+
+}
+
+var command = function(caseData, functionData){
 
     switch(caseData){
         
@@ -57,6 +83,9 @@ var pick = function(caseData, functionData){
              break;
         case "movie-this":
             getMovie(functionData);
+        case "do-what-it-says":
+            doRandom();
+            break;
         default:
         console.log("Huh? That makes no sense...");
     }
@@ -64,7 +93,7 @@ var pick = function(caseData, functionData){
 }
 
 var runThis = function(argOne, argTwo){
-    pick (argOne, argTwo);
+    command (argOne, argTwo);
 };
 
 //This passes the third and fourth arguments in the array through run this, skipping node and liri.js in command line
